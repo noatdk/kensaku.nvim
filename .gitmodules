@@ -1,0 +1,3 @@
+[submodule "deps/luamigemo"]
+	path = deps/luamigemo
+	url = https://github.com/delphinus/luamigemo.git
