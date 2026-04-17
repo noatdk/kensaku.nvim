@@ -31,7 +31,12 @@ Example (**lazy.nvim**):
 
 Use `dir = vim.fn.expand("~/path/to/kensaku.nvim")` instead of `"noatdk/kensaku.nvim"` for a local checkout. If you use LazyVim, ensure `lazy = true` so custom plugins are not all loaded at startup.
 
-**Neovim 0.12 [`vim.pack`](https://neovim.io/doc/user/lua.html#vim.pack)** (`:h vim.pack`): install both repos, e.g. `vim.pack.add({ "https://github.com/delphinus/luamigemo", "https://github.com/your-org/kensaku.nvim" })` then `require("kensaku").setup()`.
+**Neovim 0.12 [`vim.pack`](https://neovim.io/doc/user/lua.html#vim.pack)** (`:h vim.pack`): install both repos, 
+
+```lua
+vim.pack.add({ "https://github.com/delphinus/luamigemo", "https://github.com/noatdk/kensaku.nvim" })
+require("kensaku").setup()
+```
 
 To defer loading, call `vim.pack.add` + `setup()` inside a `CmdlineEnter` autocommand with `once = true`. 
 
