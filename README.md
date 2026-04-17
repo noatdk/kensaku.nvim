@@ -9,7 +9,7 @@ Conversion uses **[delphinus/luamigemo](https://github.com/delphinus/luamigemo)*
 
 ## Requirements
 
-- Neovim **0.10+** (Neovim **0.12+** if you use **`vim.pack`**).
+- Neovim **0.10+**.
 - **[luamigemo](https://github.com/delphinus/luamigemo)** on `'runtimepath'` (see **Install**). No Node or other runtime.
 - Optional: `vim.g.kensaku_migemo_dict` — path to an alternate `migemo-compact-dict` file (see luamigemo docs).
 
@@ -19,7 +19,7 @@ Example (**lazy.nvim**):
 
 ```lua
 {
-  "your-org/kensaku.nvim",
+  "noatdk/kensaku.nvim",
   dependencies = { "delphinus/luamigemo" },
   lazy = true,
   event = "CmdlineEnter",
@@ -31,7 +31,13 @@ Example (**lazy.nvim**):
 
 Use `dir = vim.fn.expand("~/path/to/kensaku.nvim")` instead of `"noatdk/kensaku.nvim"` for a local checkout. If you use LazyVim, ensure `lazy = true` so custom plugins are not all loaded at startup.
 
-**Neovim 0.12 [`vim.pack`](https://neovim.io/doc/user/lua.html#vim.pack)** (`:h vim.pack`): install both repos, e.g. `vim.pack.add({ "https://github.com/delphinus/luamigemo", "https://github.com/your-org/kensaku.nvim" })` then `require("kensaku").setup()`. To defer loading, call `vim.pack.add` + `setup()` inside a `CmdlineEnter` autocommand with `once = true`. Plain directories: `'runtimepath'` or [packages](https://neovim.io/doc/user/repeat.html#packages) + `:packadd`. Updates: `:lua vim.pack.update()` (`:h vim.pack.update()`).
+**Neovim 0.12 [`vim.pack`](https://neovim.io/doc/user/lua.html#vim.pack)** (`:h vim.pack`): install both repos, e.g. `vim.pack.add({ "https://github.com/delphinus/luamigemo", "https://github.com/your-org/kensaku.nvim" })` then `require("kensaku").setup()`.
+
+To defer loading, call `vim.pack.add` + `setup()` inside a `CmdlineEnter` autocommand with `once = true`. 
+
+Plain directories: `'runtimepath'` or [packages](https://neovim.io/doc/user/repeat.html#packages) + `:packadd`.
+
+Updates: `:lua vim.pack.update()` (`:h vim.pack.update()`).
 
 **Developing this repo:** run `git submodule update --init --recursive` so `deps/luamigemo` exists (used by `make test`).
 
