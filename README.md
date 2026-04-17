@@ -44,7 +44,7 @@ Plain directories: `'runtimepath'` or [packages](https://neovim.io/doc/user/repe
 
 Updates: `:lua vim.pack.update()` (`:h vim.pack.update()`).
 
-**Developing this repo:** run `git submodule update --init --recursive` so `deps/luamigemo` exists (used by `make test`).
+**Developing this repo:** run `make submodules` so `deps/luamigemo` exists (used by `make test`).
 
 ### What `setup()` does
 

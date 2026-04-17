@@ -9,14 +9,14 @@ local function ensure_default_pattern()
   ]])
 end
 
+---@param cmd_type string vim.fn.getcmdtype() in / or ? (pattern buffer is the romaji only, no leading / or ?).
+---@param line string vim.fn.getcmdline()
 ---@return string keysequence or '' (let chained <CR> run)
-local function replace()
-	local t = vim.fn.getcmdtype()
-	if t ~= "/" and t ~= "?" then
+local function replace_contents(cmd_type, line)
+	if cmd_type ~= "/" and cmd_type ~= "?" then
 		return ""
 	end
 	ensure_default_pattern()
-	local line = vim.fn.getcmdline()
 	local pat = vim.g["kensaku_search#pattern"]
 		or vim.g.kensaku_search_pattern
 		or vim.g.kensaku_internal_default_pattern
@@ -34,8 +34,15 @@ local function replace()
 	return c_u .. [[\m]] .. q
 end
 
+---@return string keysequence or '' (let chained <CR> run)
+local function replace()
+	return replace_contents(vim.fn.getcmdtype(), vim.fn.getcmdline())
+end
+
 return {
 	replace = replace,
 	---@nodoc Used by tests/minimal regression suite (E5108).
 	_ensure_default_pattern = ensure_default_pattern,
+	---@nodoc Headless runs cannot populate cmdline via feedkeys; tests call this with / or ? and getcmdline() text.
+	_replace_contents = replace_contents,
 }
