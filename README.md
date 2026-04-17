@@ -23,6 +23,9 @@ Example (**lazy.nvim**):
   dependencies = { "delphinus/luamigemo" },
   lazy = true,
   event = "CmdlineEnter",
+  opts = {
+    live_preview = true, -- highlight as you type
+  },
   config = function(_, opts)
     require("kensaku").setup(opts)
   end,
@@ -50,6 +53,7 @@ Updates: `:lua vim.pack.update()` (`:h vim.pack.update()`).
 
 - `cmap <expr> <Plug>(kensaku-search-replace)` — Migemo replace segment (for custom mappings).
 - `cmap <expr> <CR>` — on `/` / `?`, may replace romaji with a Migemo regex and submit; otherwise behaves like normal Enter.
+- `live_preview = true` — while typing `/` or `?`, highlight Migemo matches in the buffer (`matchadd` with `IncSearch`). Builtin `incsearch` only matches literal romaji, so it is turned off for the duration of that cmdline and restored on leave.
 
 Override the romaji detector:
 

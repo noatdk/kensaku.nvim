@@ -109,6 +109,10 @@ assert_true(search._replace_contents(":", "hensuu") == "", "replace ex-cmdline")
 assert_true(search._replace_contents("/", "123") == "", "replace non-romaji")
 assert_true(search._replace_contents("/", "") == "", "replace empty line")
 
+local p = search.migemo_vim_pattern_for_cmdline("hensuu")
+local cu = vim.api.nvim_replace_termcodes("<C-u>", true, false, true)
+assert_true(p ~= nil and search._replace_contents("/", "hensuu") == cu .. p, "migemo_vim_pattern_for_cmdline vs replace")
+
 require("kensaku").setup()
 local info = vim.fn.maparg("<CR>", "c", false, true)
 assert_true(info ~= nil and next(info) ~= nil, "cmdline <CR> mapped")

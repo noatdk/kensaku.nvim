@@ -3,6 +3,7 @@ local M = {}
 
 ---@class KensakuSetupOpts
 ---@field default_cr_map? boolean If true (default), map cmdline `<CR>` with one expr (avoids E223 recursive mapping)
+---@field live_preview? boolean If true, highlight Migemo matches in the buffer while typing `/` or `?` (default off; temporarily turns off `incsearch` during search cmdline)
 
 --- Cmdline Enter: either kensaku replace + submit, or plain Enter (must be one `<expr>` — chaining `<Plug>…<CR>` with remap retriggers `<CR>` → E223).
 local function cmdline_cr_expr()
@@ -30,6 +31,9 @@ function M.setup(opts)
 			silent = true,
 			desc = "Kensaku cmdline Enter (migemo or normal submit)",
 		})
+	end
+	if opts.live_preview then
+		require("kensaku.preview").setup()
 	end
 end
 
